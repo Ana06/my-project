@@ -2,13 +2,12 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>capa.ana</id>
-    <version>1.6.3.0</version>
+    <version>1.6.3</version>
     <title>capa</title>
     <authors>@Ana06</authors>
     <projectUrl>https://github.com/fireeye/capa</projectUrl>
     <licenseUrl>https://github.com/fireeye/capa/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-    <docsUrl>https://github.com/fireeye/capa/blob/master/README.md</docsUrl>
     <description>capa detects capabilities in executable files. You run it against a PE file or shellcode and it tells you what it thinks the program can do. For example, it might suggest that the file is a backdoor, is capable of installing services, or relies on HTTP to communicate.</description>
     <tags>malware capability python rules</tags>
   </metadata>
