@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_test_upload:
+    runs-on: windows-2016
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get changed files
+        id: files
+        uses: jitterbit/get-changed-files@v1
+      - name: Build all modified packages into built_pkgs
+        run: |
+          $built_pkgs_dir = New-Item -ItemType Directory built_pkgs
+          choco --version
+
+          $changed_files = "${{ steps.files.outputs.added_modified }}".Split(" ")
+          foreach ($changed_file in $changed_files) {
+              if ($changed_file -like "*.nuspec"){
+                  Set-Location (Split-Path $changed_file -Parent)
+                  choco pack -out $built_pkgs_dir
+            }
+          }
+      - name: Test all built packages
+        run: |
+          $built_pkgs = Get-ChildItem built_pkgs
+          Set-Location built_pkgs
+
+          foreach ($package in $built_pkgs) {
+              choco install $package
+          }
+      - name: Push all built packages to MyGet
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          $built_pkgs = Get-ChildItem built_pkgs
+          Set-Location built_pkgs
+
+          foreach ($package in $built_pkgs) {
+              cpush -s "https://www.myget.org/F/fictional-spoon/api/v2" -k ${{ secrets.MYGET_TOKEN }} $package
+          }
