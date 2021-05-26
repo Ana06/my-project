@@ -16,7 +16,7 @@ jobs:
         id: files
         uses: Ana06/get-changed-files@v1.1
         with:
-          filter: "*.nuspec"
+          filter: '*.nuspec'
       - name: Build all modified packages into built_pkgs
         id: build
         # It runs only if there are modified files
@@ -34,7 +34,7 @@ jobs:
       - name: Test all built packages
         id: test
         # Do not test if build was skipped
-        if: steps.build.outcome == "success"
+        if: steps.build.outcome == 'success'
         run: |
           # https://github.com/chocolatey/choco/blob/5868c66a2a4ef104f92d11ec638066eac2570783/src/chocolatey/infrastructure.app/services/PowershellService.cs#L309
           $validExitCodes = @(0, 1605, 1614, 1641, 3010)
@@ -49,7 +49,7 @@ jobs:
           Exit 0
       - name: Push all built packages to MyGet
         # Only push packages on master if they were built (not if testing was skipped)
-        if: steps.test.outcome == "success" && github.event_name == 'push'
+        if: steps.test.outcome == 'success' && github.event_name == 'push'
         run: |
           $built_pkgs = Get-ChildItem built_pkgs
           Set-Location built_pkgs
