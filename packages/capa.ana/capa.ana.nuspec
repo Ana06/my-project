@@ -2,10 +2,9 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
   <metadata>
     <id>capa.ana</id>
-    <version>1.6.3.20210515</version>
+    <version>1.6.3.20210526</version>
     <title>capa</title>
     <authors>@williballenthin @mr-tz @Ana06 @mike-hunhoff @mwilliams31 @MalwareMechanic</authors>
-    <owners>Ana Pepito</owners>
     <projectUrl>https://github.com/fireeye/capa</projectUrl>
     <licenseUrl>https://github.com/fireeye/capa/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
