@@ -42,7 +42,6 @@ jobs:
           }
           Exit 0
       - name: Push all built packages to MyGet
-        if: ${{ github.event_name == 'push' }}
         run: |
           $built_pkgs = Get-ChildItem built_pkgs
           Set-Location built_pkgs
