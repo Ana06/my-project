@@ -2,7 +2,7 @@ name: weekly
 
 on:
   schedule:
-    - cron: '23 * * * *' # Runs at minute 5 '0 0 * * 7' # Runs on Sundays at 00:00 UTC
+    - cron: '0 * * * *' # Runs at minute 23 '0 0 * * 7' # Runs on Sundays at 00:00 UTC
 
 jobs:
   build_test:
