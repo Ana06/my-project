@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v2
       - name: Get changed files
         id: files
-        uses: jitterbit/get-changed-files@v1
+        uses: Ana06/get-changed-files@v1.1
+        with:
+          filter: "*.nuspec"
       - name: Build all modified packages into built_pkgs
         run: |
           $root = Get-Location
@@ -22,11 +24,9 @@ jobs:
 
           $changed_files = "${{ steps.files.outputs.added_modified }}".Split(" ")
           foreach ($changed_file in $changed_files) {
-              if ($changed_file -like "*.nuspec"){
-                  Set-Location (Split-Path $root\$changed_file -Parent)
-                  choco pack -out $built_pkgs_dir
-                  if ($LASTEXITCODE -ne 0) { Exit 1 } # Abort with the first failing build
-              }
+              Set-Location (Split-Path $root\$changed_file -Parent)
+              choco pack -out $built_pkgs_dir
+              if ($LASTEXITCODE -ne 0) { Exit 1 } # Abort with the first failing build
           }
       - name: Test all built packages
         run: |
