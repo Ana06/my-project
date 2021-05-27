@@ -1,8 +1,10 @@
-name: weekly
+name: daily
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs at minute 23 '0 0 * * 7' # Runs on Sundays at 00:00 UTC
+    # Runs daily at a weird time (03:17 UTC) to avoid delays during periods of
+    # high loads of GitHub Actions workflow runs.
+    - cron: '17 3 * * *'
 
 jobs:
   build_test:
